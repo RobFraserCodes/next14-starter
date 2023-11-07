@@ -5,6 +5,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { mainNavigation } from '@/data/site-details';
 import Logo from './logo';
+import { ModeToggle } from './theme-toggle';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -15,12 +16,13 @@ export default function Header() {
         <Logo />
         <div className="hidden lg:flex lg:gap-x-12">
           {mainNavigation.map((item) => (
-            <a key={item.title} href={item.path} className="text-sm font-semibold leading-6 text-gray-900">
+            <a key={item.title} href={item.path} className="text-sm font-semibold leading-6">
               {item.title}
             </a>
           ))}
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
+            <ModeToggle />
           <a href="#" className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900">
             Log in
           </a>

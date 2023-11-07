@@ -9,7 +9,6 @@ export default function Hero() {
           <div className="px-6 lg:px-0 lg:pt-4">
             <div className="mx-auto max-w-2xl">
               <div className="max-w-lg">
-                <Logo />
                 <div className="mt-24 sm:mt-32 lg:mt-16">
                   <a href="#" className="inline-flex space-x-6">
                     <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">
@@ -54,17 +53,19 @@ export default function Hero() {
                   aria-hidden="true"
                 />
                 <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
-                  <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
-                      <div className="flex bg-gray-800/40 ring-1 ring-white/5">
-                        <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
-                          <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
-                            NotificationSetting.jsx
-                          </div>
-                          <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                    <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
+                        <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
+                        <div className="flex bg-gray-800/40 ring-1 ring-white/5">
+                            <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
+                            <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
+                                NotificationSetting.jsx
+                            </div>
+                            <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                            </div>
                         </div>
-                      </div>
-                      <div className="px-6 pb-14 pt-6">{/* Your code example */}</div>
+                        <div className="px-6 pb-14 pt-6 text-white">
+                            code{/* Your code example */}
+                        </div>
                     </div>
                   </div>
                   <div

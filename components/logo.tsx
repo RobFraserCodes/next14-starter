@@ -1,11 +1,15 @@
 import React from 'react'
+import { siteInfo } from '@/data/site-details';
 
 export default function Logo() {
   return (
-    <div className="flex lg:flex-1 justify-center">
+    <div className="flex lg:flex-1">
         <a href="/" className="-m-1.5 p-1.5">
-        <span className="sr-only">Your Company</span>
-        <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+          <div className='flex space-x-4'>
+            <span className="sr-only">{siteInfo.name}</span>
+            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+            {siteInfo.brand}
+          </div>
         </a>
     </div>
   )

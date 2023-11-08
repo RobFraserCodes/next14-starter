@@ -1,5 +1,6 @@
 export type SiteConfig = {
     name: string
+    brand: string
     description: string
     url: string
     ogImage: string

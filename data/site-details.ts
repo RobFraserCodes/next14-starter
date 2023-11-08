@@ -2,6 +2,7 @@ import { SiteConfig } from "@/types"
 
 export const siteInfo: SiteConfig = {
   name: "NextJS 14 Starter",
+  brand: "NxtJS14",
   description:
     "An open source application built using the new router, server components and everything new in Next.js 13.",
   url: "https://www.robfraser.dev",

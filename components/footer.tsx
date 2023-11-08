@@ -1,28 +1,36 @@
 import React from 'react'
 import { footerNavigation } from '@/data/site-details'
+import Logo from './logo'
+import { siteInfo } from '@/data/site-details';
 
 export default function Footer() {
-  return (
-          <footer className="mx-auto mt-40 max-w-7xl overflow-hidden px-6 pb-20 sm:mt-64 sm:pb-24 lg:px-8">
-          <nav className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
+    const currentYear = new Date().getFullYear();
+    const currentYearString = currentYear.toString();
+
+    return (
+        <footer className="mx-auto mt-40 max-w-7xl overflow-hidden px-6 pb-20 sm:mt-64 sm:pb-24 lg:px-8">
+            <nav className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
             {footerNavigation.main.map((item) => (
-              <div key={item.name} className="pb-6">
+                <div key={item.name} className="pb-6">
                 <a href={item.href} className="text-sm leading-6 text-gray-600 hover:text-gray-900">
-                  {item.name}
+                    {item.name}
                 </a>
-              </div>
+                </div>
             ))}
-          </nav>
-          <div className="mt-10 flex justify-center space-x-10">
+            </nav>
+            <div className='flex justify-center p-8'>
+                <Logo />
+            </div>
+            <div className="mt-10 flex justify-center space-x-10">
             {footerNavigation.social.map((item) => (
-              <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
+                <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
                 <span className="sr-only">{item.name}</span>
-              </a>
+                </a>
             ))}
-          </div>
-          <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-            &copy; 2020 Your Company, Inc. All rights reserved.
-          </p>
+            </div>
+            <p className="mt-10 text-center text-xs leading-5 text-gray-500">
+            &copy; {currentYearString} {siteInfo.name}. All rights reserved.
+            </p>
         </footer>
-  )
+    )
 }

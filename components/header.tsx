@@ -8,6 +8,7 @@ import { mainNavigation } from '@/data/site-details';
 import Logo from './logo';
 import { ModeToggle } from './theme-toggle';
 import { Button } from './ui/button';
+import UserMenu from './user-menu';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -25,6 +26,7 @@ export default function Header() {
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
             <ModeToggle />
+            <UserMenu />
             <Link href="#" className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6">
                 Log in
             </Link>

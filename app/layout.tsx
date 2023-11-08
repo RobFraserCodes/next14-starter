@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import ClientProviders from '@/components/client-providers'
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ClientProviders>
     <html lang="en" suppressHydrationWarning>
       <body 
         className={cn(
@@ -46,5 +48,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+    </ClientProviders>
   )
 }

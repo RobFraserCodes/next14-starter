@@ -13,7 +13,7 @@ export default function UserMenu() {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger>
-            <UserAvatar />
+            <UserAvatar name="Rob Fraser" image="" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>

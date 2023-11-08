@@ -15,11 +15,11 @@ export const siteInfo: SiteConfig = {
 }
 
 export const mainNavigation = [
-      // Replace javascript:void(0) paths with your paths
-        { title: "About", path: "/about" },
-        { title: "Integrations", path: "#" },
-        { title: "Customers", path: "#" },
-        { title: "Pricing", path: "#" }
+  // Replace javascript:void(0) paths with your paths
+    { title: "About", path: "/about" },
+    { title: "Integrations", path: "#" },
+    { title: "Customers", path: "#" },
+    { title: "Pricing", path: "#" }
 ]
 
 export const stats = [
@@ -60,6 +60,7 @@ export const values = [
       'Ipsa in earum deserunt aut. Quos minus aut animi et soluta. Ipsum dicta ut quia eius. Possimus reprehenderit iste aspernatur ut est velit consequatur distinctio.',
   },
 ]
+
 export const team = [
   {
     name: 'Michael Foster',

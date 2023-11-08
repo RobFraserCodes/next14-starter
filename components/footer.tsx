@@ -5,10 +5,9 @@ import { siteInfo } from '@/data/site-details';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
-    const currentYearString = currentYear.toString();
 
     return (
-        <footer className="mx-auto mt-40 max-w-7xl overflow-hidden px-6 pb-20 sm:mt-64 sm:pb-24 lg:px-8">
+        <footer className="mx-auto max-w-7xl overflow-hidden px-6 pb-20 sm:mt-20 sm:pb-24 lg:px-8 justify-center">
             <nav className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
             {footerNavigation.main.map((item) => (
                 <div key={item.name} className="pb-6">
@@ -18,7 +17,7 @@ export default function Footer() {
                 </div>
             ))}
             </nav>
-            <div className='flex justify-center p-8'>
+            <div className='flex justify-center items-center p-8'>
                 <Logo />
             </div>
             <div className="mt-10 flex justify-center space-x-10">
@@ -29,7 +28,7 @@ export default function Footer() {
             ))}
             </div>
             <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-            &copy; {currentYearString} {siteInfo.name}. All rights reserved.
+            &copy; {currentYear} {siteInfo.name}. All rights reserved.
             </p>
         </footer>
     )

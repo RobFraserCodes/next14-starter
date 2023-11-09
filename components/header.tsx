@@ -27,19 +27,18 @@ export default function Header() {
         <div className="flex flex-1 items-center justify-end gap-x-6">
             <ModeToggle />
             <UserMenu />
-            <Link href="#" className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6">
-                Log in
+            <Link href="#">
+                <Button variant={"ghost"}>Log in</Button>
             </Link>
             <Link href="#">
-                <Button>
-                    Sign up
-                </Button>
+                <Button>Sign up</Button>
             </Link>
         </div>
         <div className="flex lg:hidden">
           <Button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            // className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
+            variant={"default"}
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>

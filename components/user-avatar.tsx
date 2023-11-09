@@ -3,8 +3,8 @@ import Image from "next/image"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 type UserAvatarProps = {
-  name: string;
-  image: string;
+  name: string | null;
+  image: string | null;
   className?: string;
 }
 
@@ -22,10 +22,11 @@ export default function UserAvatar({ name, image, className }: UserAvatarProps) 
       )}
       <AvatarFallback>
         {name
-        ?.split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()}
+          ?.split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+        }
       </AvatarFallback>
     </Avatar>
   )

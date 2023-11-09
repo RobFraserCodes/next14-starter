@@ -8,20 +8,24 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"  
 import UserAvatar from './user-avatar'
+import { Session } from 'next-auth'
+import { Button } from './ui/button'
+import { signOut } from 'next-auth/react'
 
-export default function UserMenu() {
+export default function UserMenu( { session } : { session: Session | null }) {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger>
-            <UserAvatar name="Rob Fraser" image="" />
+            <UserAvatar name={session?.user?.name} image={session?.user?.image} />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button variant={"ghost"} onClick={() => signOut()}>
+                Sign Out
+              </Button>
+            </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
   )

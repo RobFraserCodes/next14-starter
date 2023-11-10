@@ -1,5 +1,7 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import Logo from './logo'
+import Link from 'next/link'
+import { Button } from './ui/button'
 
 export default function Hero() {
   return (
@@ -21,26 +23,25 @@ export default function Hero() {
                   </a>
                 </div>
                 <h1 className="mt-10 text-4xl font-bold tracking-tight sm:text-6xl">
-                  Supercharge your web applications
+                  Chat with anyone, anywhere!
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                  amet fugiat veniam occaecat fugiat aliqua.
+                  You speak your language, they speak theirs. We translate it all. 
+                  No more language barriers in your way. 
+                  <Link href='/chat'><span className='text-primary'> Let AI do the work for you.</span></Link>
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
-                  <a
-                    href="#"
-                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Documentation
-                  </a>
-                  <a href="#" className="text-sm font-semibold leading-6">
+                  <Link 
+                    href="/documentation"><Button>Documentation</Button></Link>
+                  <Link href="#" className="text-sm font-semibold leading-6">
                     View on GitHub <span aria-hidden="true">→</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Screenshot */}
           <div className="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
             <div
               className="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-background shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36"
@@ -76,6 +77,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
+          
         </div>
         <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-background sm:h-32" />
       </div>

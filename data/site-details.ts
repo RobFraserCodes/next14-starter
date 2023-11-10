@@ -16,11 +16,8 @@ export const siteInfo: SiteConfig = {
 }
 
 export const mainNavigation = [
-  // Replace javascript:void(0) paths with your paths
     { title: "About", path: "/about" },
-    { title: "Integrations", path: "#" },
-    { title: "Customers", path: "#" },
-    { title: "Pricing", path: "#" }
+    { title: "Documentation", path: "/documentation" },
 ]
 
 export const stats = [

@@ -11,6 +11,7 @@ import { Button } from './ui/button';
 import UserMenu from './user-menu';
 import { Session } from 'next-auth';
 import { signIn } from 'next-auth/react';
+import CreateChatButton from './create-chat-button';
 
 export default function Header( { session } : { session: Session | null } ) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -28,13 +29,15 @@ export default function Header( { session } : { session: Session | null } ) {
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-6">
-            <ModeToggle />
             { session ? (
               <>
-              <Link href="/chat">
-                <ChatBubbleBottomCenterIcon className="h-6 w-6" aria-hidden="true" />
-              </Link>
-                <UserMenu session={session}/>
+                <CreateChatButton />
+                <Link href="/chat">
+                  <Button variant={"ghost"}>
+                    <ChatBubbleBottomCenterIcon className="h-6 w-6" aria-hidden="true" />
+                  </Button>
+                </Link>
+                  <UserMenu session={session}/>
               </>
             ) : (
               <>
@@ -46,6 +49,7 @@ export default function Header( { session } : { session: Session | null } ) {
                 </Link>
               </>
             )}
+            <ModeToggle />
         </div>
         <div className="flex lg:hidden">
           <Button
@@ -62,16 +66,16 @@ export default function Header( { session } : { session: Session | null } ) {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center gap-x-6">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">{siteInfo.name}</span>
               <BeakerIcon className="h-8 w-auto text-slate-900" aria-hidden="true" />
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
-              className="ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="ml-auto"
             >
-              Sign up
-            </a>
+              <Button>Sign up</Button>
+            </Link>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"

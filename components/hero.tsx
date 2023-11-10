@@ -13,10 +13,10 @@ export default function Hero() {
               <div className="max-w-lg">
                 <div className="mt-24 sm:mt-32 lg:mt-16">
                   <a href="#" className="inline-flex space-x-6">
-                    <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">
+                    <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 ring-1 ring-inset ring-prmiary/10">
                       Whats new
                     </span>
-                    <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-600">
+                    <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6">
                       <span>Just shipped v0.1.0</span>
                       <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                     </span>

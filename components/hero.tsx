@@ -32,9 +32,9 @@ export default function Hero() {
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <Link 
-                    href="/documentation"><Button>Documentation</Button></Link>
-                  <Link href="#" className="text-sm font-semibold leading-6">
-                    View on GitHub <span aria-hidden="true">→</span>
+                    href="/chat"><Button>Get Started</Button></Link>
+                  <Link href="/pricing" className="text-sm font-semibold leading-6">
+                    View Pricing <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               </div>

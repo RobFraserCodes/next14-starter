@@ -21,14 +21,14 @@ export default function PricingCards() {
       </p>
     </div>
     <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8">
-      Choose an affordable plan that’s packed with the best features for engaging your audience, creating customer
+      Choose an affordable plan that&apos;s packed with the best features for engaging your audience, creating customer
       loyalty, and driving sales.
     </p>
     <div className="mt-16 flex justify-center">
       <RadioGroup
         value={frequency}
         onChange={setFrequency}
-        className="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs font-semibold leading-5"
+        className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5"
       >
         <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
         {pricing.frequencies.map((option) => (
@@ -36,7 +36,7 @@ export default function PricingCards() {
             key={option.value}
             value={option}
             className={({ checked }) =>
-              classNames(checked ? 'bg-primary' : '', 'cursor-pointer rounded-full px-2.5 py-1')
+              classNames(checked ? 'bg-accent' : '', 'cursor-pointer rounded-full px-2.5 py-1')
             }
           >
             <span>{option.label}</span>
@@ -44,7 +44,7 @@ export default function PricingCards() {
         ))}
       </RadioGroup>
     </div>
-    <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3 border rounded-xl">
       {pricing.tiers.map((tier) => (
         <div
           key={tier.id}
@@ -54,11 +54,11 @@ export default function PricingCards() {
           )}
         >
           <div className="flex items-center justify-between gap-x-4">
-            <h2 id={tier.id} className="text-lg font-semibold leading-8 text-white">
+            <h2 id={tier.id} className="text-lg font-semibold leading-8">
               {tier.name}
             </h2>
             {tier.mostPopular ? (
-              <p className="rounded-full bg-indigo-500 px-2.5 py-1 text-xs font-semibold leading-5 text-white">
+              <p className="rounded-full bg-indigo-500 px-2.5 py-1 text-xs font-semibold leading-5">
                 Most popular
               </p>
             ) : null}
@@ -74,7 +74,7 @@ export default function PricingCards() {
             className={classNames(
               tier.mostPopular
                 ? 'bg-indigo-500 shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500'
-                : 'bg-white/10 hover:bg-white/20 focus-visible:outline-white',
+                : 'hover:bg-white/20 focus-visible:outline-white',
               'mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
             )}
           >

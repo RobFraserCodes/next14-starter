@@ -1,37 +1,13 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+import Logo from "@/components/logo";
+
 export default function RegisterPage() {
     return (
-      <>
-        {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
-        <div className="flex min-h-full flex-1">
+      <div className="h-screen">
+        <div className="flex flex-1">
           <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
               <div>
-                <img
-                  className="h-10 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt="Your Company"
-                />
+                <Logo />
                 <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
                   Sign in to your account
                 </h2>
@@ -156,7 +132,7 @@ export default function RegisterPage() {
             />
           </div>
         </div>
-      </>
+      </div>
     )
   }
   

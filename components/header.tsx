@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon, BeakerIcon, ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline'
 import { mainNavigation, siteInfo } from '@/data/site-details';
 import Logo from './logo';
 import { ModeToggle } from './theme-toggle';
@@ -44,7 +44,7 @@ export default function Header( { session } : { session: Session | null } ) {
                 <Link href="#" >
                   <Button variant={"ghost"} onClick={() => signIn()}>Log in</Button>
                 </Link>
-                <Link href="/register"  className='hidden md:block'>
+                <Link href="/api/auth/register"  className='hidden md:block'>
                   <Button>Sign up</Button>
                 </Link>
               </>

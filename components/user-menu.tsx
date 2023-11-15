@@ -11,6 +11,7 @@ import UserAvatar from './user-avatar'
 import { Session } from 'next-auth'
 import { Button } from './ui/button'
 import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function UserMenu( { session } : { session: Session | null }) {
   return (
@@ -21,6 +22,11 @@ export default function UserMenu( { session } : { session: Session | null }) {
         <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link href="/account">
+                My Membership
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>
               <Button variant={"ghost"} onClick={() => signOut()}>
                 Sign Out

@@ -9,6 +9,6 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     pages: {
-        createUser: "/auth/register",
+        newUser: "auth/register",
     },
 } satisfies NextAuthOptions

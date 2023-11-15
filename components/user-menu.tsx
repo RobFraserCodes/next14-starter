@@ -9,7 +9,6 @@ import {
   } from "@/components/ui/dropdown-menu"  
 import UserAvatar from './user-avatar'
 import { Session } from 'next-auth'
-import { Button } from './ui/button'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 
@@ -28,9 +27,9 @@ export default function UserMenu( { session } : { session: Session | null }) {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Button variant={"ghost"} onClick={() => signOut()}>
+              <button onClick={() => signOut()}>
                 Sign Out
-              </Button>
+              </button>
             </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>

@@ -44,7 +44,7 @@ export default function Header( { session } : { session: Session | null } ) {
                 <Link href="#" >
                   <Button variant={"ghost"} onClick={() => signIn()}>Log in</Button>
                 </Link>
-                <Link href="#"  className='hidden md:block'>
+                <Link href="/register"  className='hidden md:block'>
                   <Button>Sign up</Button>
                 </Link>
               </>

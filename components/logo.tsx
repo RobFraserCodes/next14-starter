@@ -8,7 +8,7 @@ export default function Logo() {
           <div className='flex space-x-4'>
             <span className="sr-only">{siteInfo.name}</span>
             <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-            <h4>{siteInfo.brand}</h4>
+            <h4 className='hidden md:block'>{siteInfo.brand}</h4>
           </div>
         </a>
     </div>

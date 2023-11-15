@@ -18,6 +18,9 @@ export const siteInfo: SiteConfig = {
 export const mainNavigation = [
     { title: "About", path: "/about" },
     { title: "Documentation", path: "/documentation" },
+    { title: "Pricing", path: "/pricing" },
+    { title: "Blog", path: "/blog" },
+    { title: "Contact", path: "/contact" },
 ]
 
 export const stats = [

@@ -32,7 +32,7 @@ export default function Header( { session } : { session: Session | null } ) {
             { session ? (
               <>
                 <CreateChatButton />
-                <Link href="/chat">
+                <Link href="/chat" prefetch={false}>
                   <Button variant={"ghost"}>
                     <ChatBubbleBottomCenterIcon className="h-6 w-6" aria-hidden="true" />
                   </Button>

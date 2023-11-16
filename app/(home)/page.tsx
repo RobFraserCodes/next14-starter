@@ -4,9 +4,7 @@ import Features from '@/components/featured'
 import Hero from '@/components/hero'
 import ImageTiles from '@/components/image-tiles'
 import SimpleCTA from '@/components/simple-cta'
-
 import Footer from '@/components/footer'
-
 
 export default async function Home() {
 

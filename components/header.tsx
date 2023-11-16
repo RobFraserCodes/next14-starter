@@ -44,7 +44,7 @@ export default function Header( { session } : { session: Session | null } ) {
                 <Link href="#" >
                   <Button variant={"ghost"} onClick={() => signIn()}>Log in</Button>
                 </Link>
-                <Link href="/api/auth/register"  className='hidden md:block'>
+                <Link href="/register"  className='hidden md:block'>
                   <Button>Sign up</Button>
                 </Link>
               </>
@@ -98,10 +98,7 @@ export default function Header( { session } : { session: Session | null } ) {
                     href="#"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7"
                   >
-                    <Button
-                      onClick={() => signOut()}
-                      >Sign Out
-                    </Button>
+                    <Button onClick={() => signOut()}>Sign Out</Button>
                   </Link>
                   ) : (
                   <Link href="#" >

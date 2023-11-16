@@ -4,6 +4,11 @@ import React, { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { pricing } from '@/data/pricing'
+import { Button } from './ui/button'
+import { cn } from '@/lib/utils'
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -11,9 +16,20 @@ function classNames(...classes: any[]) {
 
 export default function PricingCards() {
     const [frequency, setFrequency] = useState(pricing.frequencies[0])
+    const { data: session } = useSession();
+
+    const createCheckoutSession = async (priceId: string) => {
+      if (!session) signIn();
+      // push document into firestore db
+
+      // stripe extension on firebase will create a checkout session
+
+      // redirect user to checkout page
+
+    }
 
   return (
-    <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-32 lg:px-8">
+    <div className="mx-auto max-w-7xl px-6 sm:mt-16 lg:px-8">
     <div className="mx-auto max-w-4xl text-center">
       <h1 className="text-base font-semibold leading-7 text-accent">Pricing</h1>
       <p className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -49,7 +65,7 @@ export default function PricingCards() {
         <div
           key={tier.id}
           className={classNames(
-            tier.mostPopular ? 'bg-white/5 ring-2 ring-indigo-500' : 'ring-1 ring-white/10',
+            tier.mostPopular ? 'bg-white/5 ring-2 ring-accent' : 'ring-1 ring-white/10',
             'rounded-3xl p-8 xl:p-10'
           )}
         >
@@ -68,18 +84,17 @@ export default function PricingCards() {
             <span className="text-4xl font-bold tracking-tight">{tier.price[frequency.value]}</span>
             <span className="text-sm font-semibold leading-6">{frequency.priceSuffix}</span>
           </p>
-          <a
+          <Link
             href={tier.href}
             aria-describedby={tier.id}
-            className={classNames(
-              tier.mostPopular
-                ? 'bg-indigo-500 shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500'
-                : 'hover:bg-white/20 focus-visible:outline-white',
-              'mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-            )}
           >
-            Buy plan
-          </a>
+            <Button 
+              className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 block text-center")}
+              onClick={() => createCheckoutSession(tier.id)}
+            >
+              Buy plan
+            </Button>
+          </Link>
           <ul role="list" className="mt-8 space-y-3 text-sm leading-6 xl:mt-10">
             {tier.features.map((feature) => (
               <li key={feature} className="flex gap-x-3">

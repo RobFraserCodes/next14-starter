@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 
 export default function RegisterPage() {
   return (
-    <div className="h-screen bg-accent py-20">
+    <div className=" bg-accent py-8">
       <div className="flex flex-1 flex-col py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md text-center mx-auto">
             <Logo />
@@ -82,7 +82,7 @@ export default function RegisterPage() {
                   <div className="w-full border-t border-gray-200" />
                 </div>
                 <div className="relative flex justify-center text-sm font-medium leading-6">
-                  <span className="bg-white px-6 text-gray-900">Or continue with</span>
+                  <span className="bg-background px-6">Or continue with</span>
                 </div>
               </div>
 

@@ -26,7 +26,12 @@ export default function UserMenu( { session } : { session: Session | null }) {
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link href="/account">
-                My Membership
+                Account
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/subscription">
+                Subscription
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>

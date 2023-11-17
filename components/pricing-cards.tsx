@@ -10,10 +10,6 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
 
-function classNames(...classes: any[]) {
-    return classes.filter(Boolean).join(' ')
-  }  
-
 export default function PricingCards() {
     const [frequency, setFrequency] = useState(pricing.frequencies[0])
     const { data: session } = useSession();
@@ -52,7 +48,7 @@ export default function PricingCards() {
             key={option.value}
             value={option}
             className={({ checked }) =>
-              classNames(checked ? 'bg-accent' : '', 'cursor-pointer rounded-full px-2.5 py-1')
+              cn(checked ? 'bg-accent' : '', 'cursor-pointer rounded-full px-2.5 py-1')
             }
           >
             <span>{option.label}</span>
@@ -64,7 +60,7 @@ export default function PricingCards() {
       {pricing.tiers.map((tier) => (
         <div
           key={tier.id}
-          className={classNames(
+          className={cn(
             tier.mostPopular ? 'bg-white/5 ring-2 ring-accent' : 'ring-1 ring-white/10',
             'rounded-3xl p-8 xl:p-10'
           )}
@@ -74,27 +70,33 @@ export default function PricingCards() {
               {tier.name}
             </h2>
             {tier.mostPopular ? (
-              <p className="rounded-full bg-indigo-500 px-2.5 py-1 text-xs font-semibold leading-5">
+              <p className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold leading-5">
                 Most popular
               </p>
             ) : null}
           </div>
+
+          {/* Tier Details */}
           <p className="mt-4 text-sm leading-6">{tier.description}</p>
           <p className="mt-6 flex items-baseline gap-x-1">
-            <span className="text-4xl font-bold tracking-tight">{tier.price[frequency.value]}</span>
+            <span className="text-4xl font-bold tracking-tight">
+              {tier.price[frequency.value as keyof typeof tier.price]}
+            </span>
             <span className="text-sm font-semibold leading-6">{frequency.priceSuffix}</span>
           </p>
-          <Link
-            href={tier.href}
-            aria-describedby={tier.id}
-          >
-            <Button 
-              className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 block text-center")}
-              onClick={() => createCheckoutSession(tier.id)}
-            >
-              Buy plan
-            </Button>
-          </Link>
+
+          {/* Conditional Button Rendering */}
+          {!(session && tier.name === 'Free') && (
+              <Link href={tier.href} aria-describedby={tier.id}>
+                <Button
+                  className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 block text-center")}
+                  onClick={() => createCheckoutSession(tier.id)}
+                >
+                  {session ? (tier.name === 'Free' ? 'Sign Up' : 'Subscribe') : 'Purchase Plan'}
+                </Button>
+              </Link>
+            )}
+
           <ul role="list" className="mt-8 space-y-3 text-sm leading-6 xl:mt-10">
             {tier.features.map((feature) => (
               <li key={feature} className="flex gap-x-3">

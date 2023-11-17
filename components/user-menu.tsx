@@ -16,10 +16,13 @@ export default function UserMenu( { session } : { session: Session | null }) {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger>
-            <UserAvatar name={session?.user?.name} image={session?.user?.image} />
+        <UserAvatar 
+          name={session?.user?.name ?? null} 
+          image={session?.user?.image ?? null} 
+        />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link href="/account">

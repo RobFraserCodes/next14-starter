@@ -34,7 +34,7 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
     const price = parseFloat(priceStr.replace('$', '')); // Remove dollar sign and parse to number
     const tax = price * 0.20; // 20% tax
     const subtotal = price - tax;
-    const total = price + 14.00; // Total price including shipping
+    const total = price;
 
     return {
       subtotal: subtotal.toFixed(2),
@@ -67,7 +67,11 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
             <div>
               <h2>Selected Plan: {selectedTier.name}</h2>
               <p>Billing: {selectedFrequency.label}</p>
-              <p>Price: {}</p>
+              <p>Price: {
+                selectedTier.price[selectedFrequency.value] === 'Free' 
+                  ? 'Free' 
+                  : `${selectedTier.price[selectedFrequency.value]} per ${selectedFrequency.priceSuffix}`
+              }</p>
             </div>
 
             {/* Price Breakdown */}

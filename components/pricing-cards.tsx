@@ -100,15 +100,15 @@ export default function PricingCards() {
 
           {/* Conditional Button Rendering */}
           {!(session && tier.name === 'Free') && (
-            <Link href={tier.href} aria-describedby={tier.id}>
-              <Button
-                className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
-                onClick={() => createCheckoutSession(tier.id)}
-              >
-                {session ? (tier.name === 'Free' ? 'Sign Up' : 'Subscribe') : 'Purchase Plan'}
-              </Button>
-            </Link>
-          )}
+              <Link href={`/checkout?tier=${tier.id}&frequency=${frequency.value}`}
+                aria-describedby={tier.id}>
+                  <Button
+                    className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
+                  >
+                    {session ? (tier.name === 'Free' ? 'Sign Up' : 'Subscribe') : 'Purchase Plan'}
+                  </Button>
+              </Link>
+            )}
 
         </div>
       ))}

@@ -36,6 +36,8 @@ export default function PricingCards() {
       Choose an affordable plan that&apos;s packed with the best features for engaging your audience, creating customer
       loyalty, and driving sales.
     </p>
+
+    {/* Monthly / Annual Subscription */}
     <div className="mt-16 flex justify-center">
       <RadioGroup
         value={frequency}
@@ -56,7 +58,9 @@ export default function PricingCards() {
         ))}
       </RadioGroup>
     </div>
-    <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3 border rounded-xl">
+
+    {/* Pricing Cards */}
+    <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3 rounded-xl">
       {pricing.tiers.map((tier) => (
         <div
           key={tier.id}
@@ -85,18 +89,6 @@ export default function PricingCards() {
             <span className="text-sm font-semibold leading-6">{frequency.priceSuffix}</span>
           </p>
 
-          {/* Conditional Button Rendering */}
-          {!(session && tier.name === 'Free') && (
-              <Link href={tier.href} aria-describedby={tier.id}>
-                <Button
-                  className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 block text-center")}
-                  onClick={() => createCheckoutSession(tier.id)}
-                >
-                  {session ? (tier.name === 'Free' ? 'Sign Up' : 'Subscribe') : 'Purchase Plan'}
-                </Button>
-              </Link>
-            )}
-
           <ul role="list" className="mt-8 space-y-3 text-sm leading-6 xl:mt-10">
             {tier.features.map((feature) => (
               <li key={feature} className="flex gap-x-3">
@@ -105,6 +97,19 @@ export default function PricingCards() {
               </li>
             ))}
           </ul>
+
+          {/* Conditional Button Rendering */}
+          {!(session && tier.name === 'Free') && (
+            <Link href={tier.href} aria-describedby={tier.id}>
+              <Button
+                className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
+                onClick={() => createCheckoutSession(tier.id)}
+              >
+                {session ? (tier.name === 'Free' ? 'Sign Up' : 'Subscribe') : 'Purchase Plan'}
+              </Button>
+            </Link>
+          )}
+
         </div>
       ))}
     </div>

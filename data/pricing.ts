@@ -7,7 +7,7 @@ export const pricing = {
     {
       name: 'Free',
       id: 'tier-free',
-      href: '/login',
+      href: '#',
       price: { monthly: 'Free', annually: 'Free' },
       description: 'Basic features for occasional translation needs.',
       features: [
@@ -21,7 +21,7 @@ export const pricing = {
     {
       name: 'Startup',
       id: 'tier-startup',
-      href: '/order',
+      href: '#',
       price: { monthly: '$30', annually: '$288' },
       description: 'Comprehensive tools for growing translation businesses.',
       features: [
@@ -36,7 +36,7 @@ export const pricing = {
     {
       name: 'Enterprise',
       id: 'tier-enterprise',
-      href: '/order',
+      href: '#',
       price: { monthly: '$60', annually: '$576' },
       description: 'Full suite for large-scale translation projects and larger companies.',
       features: [

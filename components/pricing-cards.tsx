@@ -105,7 +105,7 @@ export default function PricingCards() {
                   <Button
                     className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
                   >
-                    {session ? (tier.name === 'Free' ? 'Sign Up' : 'Subscribe') : 'Purchase Plan'}
+                    {session ? (tier.name === 'Free' ? 'Sign Up' : 'Upgrade') : 'Purchase Plan'}
                   </Button>
               </Link>
             )}

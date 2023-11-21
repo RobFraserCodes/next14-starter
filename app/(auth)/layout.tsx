@@ -6,10 +6,10 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import '../globals.css'
 import ClientProviders from '@/components/client-providers'
-import Header from '@/components/header'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/auth'
 import { Analytics } from '@/lib/analytics'
+import FirebaseAuthProvider from '@/components/firebaseAuthProvider'
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -41,6 +41,7 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
+        <FirebaseAuthProvider>
         <ThemeProvider 
           attribute='class'
           defaultTheme='system'
@@ -51,6 +52,7 @@ export default async function RootLayout({
           <Analytics />
           <Toaster />
         </ThemeProvider>
+        </FirebaseAuthProvider>
       </body>
     </html>
     </ClientProviders>

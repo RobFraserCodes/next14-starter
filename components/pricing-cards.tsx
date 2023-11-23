@@ -99,17 +99,19 @@ export default function PricingCards() {
           </ul>
 
           {/* Conditional Button Rendering */}
-          {!(session && tier.name === 'Free') && (
-              <Link href={`/checkout?tier=${tier.id}&frequency=${frequency.value}`}
+          {
+            !(session && tier.name === 'Free') && (
+              <Link 
+                href={session ? `/checkout?tier=${tier.id}&frequency=${frequency.value}` : (tier.name === 'Free' ? '/api/auth/signin' : `/checkout?tier=${tier.id}&frequency=${frequency.value}`)}
                 aria-describedby={tier.id}>
                   <Button
                     className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
                   >
-                    {session ? (tier.name === 'Free' ? 'Sign Up' : 'Upgrade') : 'Purchase Plan'}
+                    {session ? 'Upgrade' : (tier.name === 'Free' ? 'Sign Up' : 'Purchase Plan')}
                   </Button>
               </Link>
-            )}
-
+            )
+          }
         </div>
       ))}
     </div>

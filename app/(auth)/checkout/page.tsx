@@ -126,11 +126,6 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
             <h2 className="sr-only">Payment details</h2>
 
             {/* Stripe Checkout */}
-            {!session ? (
-              <p>You must be logged in to continue.</p>
-            ) : (
-              <p>Logged in as {session.user.email}</p>
-            )}
             <Button
               type="button"
               className="flex w-full items-center justify-center"

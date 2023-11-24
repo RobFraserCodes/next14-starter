@@ -25,8 +25,9 @@ export default function ContactInformation({onContinue}: {onContinue: () => void
     },
   });
 
+  const isValid = form.formState.isValid;
+
   function onSubmit(values: z.infer<typeof schema>) {
-    console.log(values);
     onContinue();
   };
 
@@ -75,23 +76,23 @@ export default function ContactInformation({onContinue}: {onContinue: () => void
           <>
           <FormItem className='space-x-3'>
             <FormControl>
-              <Checkbox checked={field.value} onCheckedChange={field.onChange}
-              />
+              <Checkbox checked={field.value} onCheckedChange={field.onChange} />
             </FormControl>
             <Label htmlFor="term">
               I have read the terms and conditions and agree to the sale of my personal information to the highest bidder.
             </Label>
           </FormItem>
           <FormMessage />
+
+          <Button type="submit" disabled={!isValid} className="mt-6 w-full">
+            Continue
+          </Button>
           </>
         )}
       />
 
       </div>
 
-      <Button type="submit" disabled className="mt-6 w-full">
-        Continue
-      </Button>
 
       </form>
     </Form>

@@ -1,103 +1,99 @@
-'use client'
-
-import React, {useState} from 'react'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+
+const schema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  phone: z.string().min(1, "Phone number is required"),
+  terms: z.boolean().refine(val => val === true, "You must agree to the terms"),
+});
 
 export default function ContactInformation({onContinue}: {onContinue: () => void}) {
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [terms, setTerms] = useState(false);
-    const [isContinueEnabled, setIsContinueEnabled] = useState(false);
-  
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-  
-    const handlePhoneChange = (e) => {
-        setPhone(e.target.value);
-    };
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+    defaultValues: {
+      email: '',
+      phone: '',
+      terms: false,
+    },
+  });
 
-    const handleTermsChange = (e) => {
-        setTerms(true);
-        checkFormValidity();
-    };
-  
-    const checkFormValidity = () => {
-      if (email && phone ) {
-        setIsContinueEnabled(true);
-      }
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // Store user data and open payment details
-      if (isContinueEnabled) {
-        onContinue();
-      }
-    };
+  function onSubmit(values: z.infer<typeof schema>) {
+    console.log(values);
+    onContinue();
+  };
 
   return (
-    <>
-    <form className="mt-6" onSubmit={handleSubmit}>
-    <h2>Contact information</h2>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <h2>Contact information</h2>
 
-    <div className="mt-6">
-      <Label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-        Email address
-      </Label>
-      <div className="mt-1">
-        <Input
-          type="email"
-          id="email-address"
-          name="email-address"
-          autoComplete="email"
-          onChange={handleEmailChange}
+      <div className="mt-6">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email</FormLabel>
+            <FormControl>
+              <Input placeholder='Your email address' {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+          )}
         />
       </div>
-    </div>
 
-    <div className="mt-6">
-      <Label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-        Phone number
-      </Label>
-      <div className="mt-1">
-        <Input
-          type="text"
+      <div className="mt-6">
+        <FormField
+          control={form.control}
           name="phone"
-          id="phone"
-          autoComplete="tel"
-          onChange={handlePhoneChange}
+          render={({ field }) => (
+          <FormItem>
+            <FormLabel>Phone</FormLabel>
+            <FormControl>
+              <Input placeholder='Your telephone number' {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+          )}
         />
       </div>
-    </div>
 
-    <div className="mt-6 flex space-x-2">
-      <div className="flex h-5 items-center">
-        <Checkbox
-          id="terms"
+      <div className="mt-6">
+        <FormField
+          control={form.control}
           name="terms"
-          onClick={handleTermsChange}
-        />
+          render={({ field }) => (
+          <>
+          <FormItem className='space-x-3'>
+            <FormControl>
+              <Checkbox checked={field.value} onCheckedChange={field.onChange}
+              />
+            </FormControl>
+            <Label htmlFor="term">
+              I have read the terms and conditions and agree to the sale of my personal information to the highest bidder.
+            </Label>
+          </FormItem>
+          <FormMessage />
+          </>
+        )}
+      />
+
       </div>
-      <Label htmlFor="terms" className="text-sm text-gray-500">
-        I have read the terms and conditions and agree to the sale of my personal information to the highest
-        bidder.
-      </Label>
-    </div>
 
-    <Button
-      type="submit"
-      disabled={!isContinueEnabled}
-      className={`mt-6 w-full ${isContinueEnabled ? 'cursor-pointer text-white bg-primary' : 'disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500'}`}
-      onSubmit={handleSubmit}
-      >
-      Continue
-    </Button>
-  </form>
-  </>
+      <Button type="submit" disabled className="mt-6 w-full">
+        Continue
+      </Button>
 
-  )
+      </form>
+    </Form>
+  );
 }

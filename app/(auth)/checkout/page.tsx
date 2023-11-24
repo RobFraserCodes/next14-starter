@@ -4,11 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { pricing } from "@/data/pricing";
 import { useSearchParams } from "next/navigation";
 import Logo from '@/components/logo';
-import UserMenu from '@/components/user-menu';
 import { Session } from 'next-auth';
 import { CreditCardIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/components/ui/button';
 import ContactInformation from './components/contactInfo';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import PaymentInfo from './components/paymentInfo';
+import ShippingInfo from './components/shippingInfo';
+
+interface PriceDetails {
+  subtotal: string;
+  tax: string;
+  total: string;
+  price: string;
+  tier: string;
+}
 
 const CheckoutSteps = {
   CONTACT_INFO: 'contactInfo',
@@ -56,7 +66,7 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
     }
   }, [searchParams]);
 
-  const calculatePriceDetails = (priceStr) => {
+  const calculatePriceDetails = (priceStr: string) => {
     if (priceStr === 'Free') {
       return { subtotal: 'Free', tax: 'Free', total: 'Free' };
     }
@@ -83,7 +93,6 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
     <div className="bg-background">
       <header className="flex items-center justify-between px-4 py-10 sm:px-6 sm:py-8 lg:px-8">
         <Logo />
-        <UserMenu session={session} />
       </header>
 
       <main className="mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 sm:pb-24 sm:pt-8 lg:px-8 xl:px-2 xl:pt-14">
@@ -135,7 +144,8 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
               Quick Checkout with Stripe
             </Button>
 
-            {/* Seperator */}
+            {/* Manual Checkout */}
+            <>
             <div className="relative mt-8">
               <div className="absolute inset-0 flex items-center" aria-hidden="true">
                 <div className="w-full border-t border-gray-200" />
@@ -145,49 +155,52 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
               </div>
             </div>
 
-            {/* Manual Checkout */}
-            {currentStep === CheckoutSteps.CONTACT_INFO && (
-              <ContactInformation onContinue={goToNextStep} />
-            )}
+            <ContactInformation onContinue={goToNextStep} />
 
-            <div className="mt-10 divide-y divide-gray-200 border-b border-t border-gray-200">
-              
-              {currentStep === CheckoutSteps.PAYMENT_DETAILS && (
-              <button
-                type="button"
-                disabled
-                className="w-full cursor-auto py-6 text-left text-lg font-medium text-gray-500"
-              >
-                Payment details
-              </button>
-              )}
+            <Accordion type='single' collapsible className='w-full'>
+              <AccordionItem value='item-1'>
+                <AccordionTrigger className='text-foreground/40'>Payment Details</AccordionTrigger>
+                <AccordionContent>
+                  <PaymentInfo />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-              <button
-                type="button"
-                disabled
-                className="w-full cursor-auto py-6 text-left text-lg font-medium text-gray-500"
-              >
-                Shipping address
-              </button>
+            <Accordion type='single' collapsible className='w-full'>
+              <AccordionItem value='item-1'>
+                <AccordionTrigger>Shipping Information</AccordionTrigger>
+                <AccordionContent>
+                  <ShippingInfo />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-              <button
-                type="button"
-                disabled
-                className="w-full cursor-auto py-6 text-left text-lg font-medium text-gray-500"
-              >
-                Billing address
-              </button>
+            <Accordion type='single' collapsible className='w-full'>
+              <AccordionItem value='item-1'>
+                <AccordionTrigger>Billing Address</AccordionTrigger>
+                <AccordionContent>
+                  <div className="py-16 border-gray-200 pt-10">
+                    Billing details
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-              <button
-                type="button"
-                disabled
-                className="w-full cursor-auto py-6 text-left text-lg font-medium text-gray-500"
-              >
-                Review
-              </button>
+            <Accordion type='single' collapsible className='w-full'>
+              <AccordionItem value='item-1'>
+                <AccordionTrigger>Review</AccordionTrigger>
+                <AccordionContent>
+                  <div className="py-16 border-gray-200 pt-10">
+                    Review details
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+
+
+            </>
 
             </div>
-          </div>
         </div>
       </main>
     </div>

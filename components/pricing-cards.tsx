@@ -6,13 +6,28 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import { pricing } from '@/data/pricing'
 import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
+import { Tier } from '@/types';
 
 export default function PricingCards() {
     const [frequency, setFrequency] = useState(pricing.frequencies[0])
     const { data: session } = useSession();
+    const router = useRouter();
+
+    const handleButtonClick = (tier: Tier) => {
+      if (!session) {
+        if (tier.name === 'Free') {
+          signIn('google', { callbackUrl: '/chat' });
+        } else {
+          router.push(`/checkout?tier=${tier.id}&frequency=${frequency.value}`);
+        }
+      } else {
+        const checkoutUrl = tier.name === 'Free' ? '/chat' : `/checkout?tier=${tier.id}&frequency=${frequency.value}`;
+        router.push(checkoutUrl);
+      }
+    };    
 
     const createCheckoutSession = async (priceId: string) => {
       if (!session) signIn();
@@ -101,15 +116,12 @@ export default function PricingCards() {
           {/* Conditional Button Rendering */}
           {
             !(session && tier.name === 'Free') && (
-              <Link 
-                href={session ? `/checkout?tier=${tier.id}&frequency=${frequency.value}` : (tier.name === 'Free' ? '/api/auth/signin' : `/checkout?tier=${tier.id}&frequency=${frequency.value}`)}
-                aria-describedby={tier.id}>
-                  <Button
-                    className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
-                  >
-                    {session ? 'Upgrade' : (tier.name === 'Free' ? 'Sign Up' : 'Purchase Plan')}
-                  </Button>
-              </Link>
+              <Button
+                onClick={() => handleButtonClick(tier)}
+                className={cn(tier.mostPopular ? "bg-accent" : "bg-primary", "leading-6 mt-6 text-center w-full")}
+              >
+                {session ? 'Upgrade' : (tier.name === 'Free' ? 'Sign Up' : 'Purchase Plan')}
+              </Button>
             )
           }
         </div>

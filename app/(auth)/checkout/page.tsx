@@ -12,44 +12,24 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import PaymentInfo from './components/paymentInfo';
 import ShippingInfo from './components/shippingInfo';
 
-interface PriceDetails {
-  subtotal: string;
-  tax: string;
-  total: string;
-  price: string;
-  tier: string;
-}
-
-const CheckoutSteps = {
-  CONTACT_INFO: 'contactInfo',
-  PAYMENT_DETAILS: 'paymentDetails',
-  SHIPPING_ADDRESS: 'shippingAddress',
-  BILLING_ADDRESS: 'billingAddress',
-  REVIEW: 'review',
-};
-
 export default function CheckoutPage({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const [selectedTier, setSelectedTier] = useState(null);
   const [selectedFrequency, setSelectedFrequency] = useState(null);
-  const [currentStep, setCurrentStep] = useState(CheckoutSteps.CONTACT_INFO);
+  const [openAccordionItem, setOpenAccordionItem] = useState('contact-info');
 
   const goToNextStep = () => {
-    switch (currentStep) {
-      case CheckoutSteps.CONTACT_INFO:
-        setCurrentStep(CheckoutSteps.PAYMENT_DETAILS);
-        break;
-      case CheckoutSteps.PAYMENT_DETAILS:
-        setCurrentStep(CheckoutSteps.SHIPPING_ADDRESS);
-        break;
-      case CheckoutSteps.SHIPPING_ADDRESS:
-        setCurrentStep(CheckoutSteps.BILLING_ADDRESS);
-        break;
-      case CheckoutSteps.BILLING_ADDRESS:
-        setCurrentStep(CheckoutSteps.REVIEW);
-        break;
-      default:
-        break;
+    if (openAccordionItem === 'contact-info') {
+      setOpenAccordionItem('payment-details');
+    }
+    else if (openAccordionItem === 'payment-details') {
+      setOpenAccordionItem('shipping-info');
+    }
+    else if (openAccordionItem === 'shipping-info') {
+      setOpenAccordionItem('billing-address');
+    }
+    else if (openAccordionItem === 'billing-address') {
+      setOpenAccordionItem('review');
     }
   };
 
@@ -148,35 +128,36 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
             <>
             <div className="relative mt-8">
               <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                <div className="w-full border-t border-gray-200" />
+                <div className="w-full border-t border-primary/20" />
               </div>
               <div className="relative flex justify-center">
-                <span className="bg-white px-4 text-sm font-medium text-gray-500">or</span>
+                <span className="bg-background px-4 text-sm font-medium text-foreground/50">or</span>
               </div>
             </div>
 
-            <ContactInformation onContinue={goToNextStep} />
+            <Accordion type='single' collapsible value={openAccordionItem} className='w-full'>
+              <AccordionItem value='contact-info'>
+                <AccordionTrigger>Contact Information</AccordionTrigger>
+                <AccordionContent>
+                  <ContactInformation onContinue={goToNextStep} />
+                </AccordionContent>
+              </AccordionItem>
 
-            <Accordion type='single' collapsible className='w-full'>
-              <AccordionItem value='item-1'>
-                <AccordionTrigger className='text-foreground/40'>Payment Details</AccordionTrigger>
+              <AccordionItem value='payment-details'>
+                <AccordionTrigger>Payment Details</AccordionTrigger>
                 <AccordionContent>
                   <PaymentInfo />
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>
 
-            <Accordion type='single' collapsible className='w-full'>
-              <AccordionItem value='item-1'>
+              <AccordionItem value='shipping-info'>
                 <AccordionTrigger>Shipping Information</AccordionTrigger>
                 <AccordionContent>
                   <ShippingInfo />
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>
 
-            <Accordion type='single' collapsible className='w-full'>
-              <AccordionItem value='item-1'>
+              <AccordionItem value='billing-address'>
                 <AccordionTrigger>Billing Address</AccordionTrigger>
                 <AccordionContent>
                   <div className="py-16 border-gray-200 pt-10">
@@ -184,10 +165,8 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
                   </div>
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>
 
-            <Accordion type='single' collapsible className='w-full'>
-              <AccordionItem value='item-1'>
+              <AccordionItem value='review'>
                 <AccordionTrigger>Review</AccordionTrigger>
                 <AccordionContent>
                   <div className="py-16 border-gray-200 pt-10">
@@ -196,11 +175,10 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          
+          </>
 
-
-            </>
-
-            </div>
+          </div>
         </div>
       </main>
     </div>

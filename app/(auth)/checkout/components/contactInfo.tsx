@@ -28,14 +28,13 @@ export default function ContactInformation({onContinue}: {onContinue: () => void
   const isValid = form.formState.isValid;
 
   function onSubmit(values: z.infer<typeof schema>) {
+    console.log(values);
     onContinue();
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-      <h2>Contact information</h2>
-
+      <form onSubmit={form.handleSubmit(onSubmit)} className='px-1'>
       <div className="mt-6">
         <FormField
           control={form.control}

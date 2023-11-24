@@ -22,7 +22,7 @@ const paymentMethods = [
 
 export default function PaymentInfo() {
   return (
-    <div className="py-16 border-gray-200 pt-10">
+    <div className="py-16 border-gray-200 pt-10 px-1">
     <fieldset>
       <legend className="sr-only">Payment type</legend>
       <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">

@@ -29,16 +29,6 @@ export default function PricingCards() {
       }
     };    
 
-    const createCheckoutSession = async (priceId: string) => {
-      if (!session) signIn();
-      // push document into firestore db
-
-      // stripe extension on firebase will create a checkout session
-
-      // redirect user to checkout page
-
-    }
-
   return (
     <div className="mx-auto max-w-7xl px-6 sm:mt-16 lg:px-8">
     <div className="mx-auto max-w-4xl text-center">

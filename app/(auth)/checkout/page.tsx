@@ -30,10 +30,6 @@ interface Frequency {
   priceSuffix: string;
 }
 
-interface CheckoutPageProps {
-  session: Session | null;
-}
-
 export default function CheckoutPage({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
@@ -59,23 +55,34 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
     const tierId = searchParams.get('tier');
     const frequencyValue = searchParams.get('frequency') as "monthly" | "yearly" | null;
   
+    console.log('Tier ID:', tierId);
+    console.log('Frequency Value:', frequencyValue);
+  
     if (tierId && frequencyValue) {
       const foundTier = pricing.tiers.find(tier => tier.id === tierId);
   
+      console.log('Found Tier:', foundTier);
+  
       if (foundTier) {
-        // Adjust the structure to fit the Tier type
         setSelectedTier({
           ...foundTier,
           price: {
             monthly: foundTier.price.monthly,
-            yearly: foundTier.price.annually // Map 'annually' to 'yearly'
-          }
-        });
+            yearly: foundTier.price.annually // Ensure this matches your data structure
+          },
+        })
+        setSelectedFrequency({
+          value: frequencyValue,
+          label: frequencyValue === 'monthly' ? 'Monthly' : 'Yearly',
+          priceSuffix: frequencyValue === 'monthly' ? 'month' : 'year'
+          });
       } else {
         setSelectedTier(null);
       }
+    } else {
+      console.warn('Tier ID or Frequency Value is missing');
     }
-  }, [searchParams]);
+  }, [searchParams]);  
 
   const calculatePriceDetails = (priceStr: string) => {
     if (priceStr === 'Free') {

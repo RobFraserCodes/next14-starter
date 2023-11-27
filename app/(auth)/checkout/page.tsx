@@ -12,10 +12,32 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import PaymentInfo from './components/paymentInfo';
 import ShippingInfo from './components/shippingInfo';
 
+interface Tier {
+  id: string;
+  name: string;
+  description: string;
+  href: string;
+  features: string[];
+  price: {
+    monthly: string;
+    yearly: string;
+  };
+}
+
+interface Frequency {
+  value: 'monthly' | 'yearly';
+  label: string;
+  priceSuffix: string;
+}
+
+interface CheckoutPageProps {
+  session: Session | null;
+}
+
 export default function CheckoutPage({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
-  const [selectedTier, setSelectedTier] = useState(null);
-  const [selectedFrequency, setSelectedFrequency] = useState(null);
+  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
+  const [selectedFrequency, setSelectedFrequency] = useState<Frequency | null>(null);
   const [openAccordionItem, setOpenAccordionItem] = useState('contact-info');
 
   const goToNextStep = () => {
@@ -35,14 +57,23 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
 
   useEffect(() => {
     const tierId = searchParams.get('tier');
-    const frequencyValue = searchParams.get('frequency');
-
+    const frequencyValue = searchParams.get('frequency') as "monthly" | "yearly" | null;
+  
     if (tierId && frequencyValue) {
       const foundTier = pricing.tiers.find(tier => tier.id === tierId);
-      const foundFrequency = pricing.frequencies.find(frequency => frequency.value === frequencyValue);
-      
-      setSelectedTier(foundTier);
-      setSelectedFrequency(foundFrequency);
+  
+      if (foundTier) {
+        // Adjust the structure to fit the Tier type
+        setSelectedTier({
+          ...foundTier,
+          price: {
+            monthly: foundTier.price.monthly,
+            yearly: foundTier.price.annually // Map 'annually' to 'yearly'
+          }
+        });
+      } else {
+        setSelectedTier(null);
+      }
     }
   }, [searchParams]);
 
@@ -146,7 +177,7 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
               <AccordionItem value='payment-details'>
                 <AccordionTrigger>Payment Details</AccordionTrigger>
                 <AccordionContent>
-                  <PaymentInfo />
+                  <PaymentInfo onContinue={goToNextStep} />
                 </AccordionContent>
               </AccordionItem>
 

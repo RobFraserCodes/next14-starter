@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# next14-starter
+
+This project, **next14-starter**, is a boilerplate for quickly starting a web application using Next.js 14, a cutting-edge React framework. Designed to accelerate development processes, this starter kit is pre-configured with a suite of modern tools and libraries tailored to streamline building applications on your preferred tech stack.
+
+## Features
+
+- **Next.js 14**: Utilizing the latest version for enhanced performance and improved developer experience.
+- **Tailwind CSS**: For rapid and responsive styling.
+- **Next Auth**: Integrated authentication solution.
+- **Headless UI & Heroicons**: Accessible UI components and beautiful SVG icons.
+- **Radix UI**: Unstyled, accessible components for building high-quality design systems and web apps.
+- **Lucide React**: Beautifully crafted open-source icons.
+- **Tailwind Merge**: Utility for combining Tailwind CSS classes.
 
 ## Getting Started
 
-First, run the development server:
+To get started with `next14-starter`, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the Repository**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   git clone https://github.com/robfrasercodes/next-14-starter.git
+   cd next14-starter
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Install Dependencies**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   Ensure you have Node.js installed, then run:
 
-## Learn More
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Run the Development Server**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   Visit `http://localhost:3000` in your browser to see the application running.
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the application for production.
+- `npm run start`: Runs the built app in production mode.
+- `npm run lint`: Runs ESLint to catch linting errors.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Project Structure
+
+- `components/`: Reusable UI components.
+- `pages/`: Your application's page files.
+- `public/`: Static files like images, fonts, etc.
+- `styles/`: Global CSS files and Tailwind configurations.
+- `lib/`: Helper functions and libraries.
+
+## Contributing
+
+Contributions are always welcome! Feel free to fork this repository and submit pull requests or create issues for any features or improvements.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).

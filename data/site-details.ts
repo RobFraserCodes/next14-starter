@@ -1,10 +1,10 @@
 import { SiteConfig } from "@/types"
 
 export const siteInfo: SiteConfig = {
-  name: "ChatAI App",
-  brand: "Chappi",
+  name: "Next.js 14",
+  brand: "NxjStarter",
   description:
-    "An open source application built using the new router, server components and everything new in Next.js 13.",
+    "An open source application built using the new router, server components and everything new in Next.js 14.",
   url: "https://www.robfraser.dev",
   keywords: ["nextjs 14", "typescript", "react", "tailwindcss"],
   author: ["Rob Fraser"],

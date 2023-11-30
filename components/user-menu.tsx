@@ -8,20 +8,37 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"  
 import UserAvatar from './user-avatar'
+import { Session } from 'next-auth'
+import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 
-export default function UserMenu() {
+export default function UserMenu( { session } : { session: Session | null }) {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger>
-            <UserAvatar name="Rob Fraser" image="" />
+        <UserAvatar 
+          name={session?.user?.name ?? null} 
+          image={session?.user?.image ?? null} 
+        />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/account">
+                Account
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/subscription">
+                Subscription
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <button onClick={() => signOut()}>
+                Sign Out
+              </button>
+            </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
   )

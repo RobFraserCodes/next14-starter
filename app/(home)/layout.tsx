@@ -3,10 +3,13 @@ import { cn } from '@/lib/utils'
 import { siteInfo } from '@/data/site-details'
 import { Inter as FontSans } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
-import './globals.css'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import { Toaster } from '@/components/ui/toaster'
+import '../globals.css'
 import ClientProviders from '@/components/client-providers'
+import Header from '@/components/header'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/auth'
+import { Analytics } from '@/lib/analytics'
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -22,17 +25,19 @@ export const metadata: Metadata = {
   keywords: siteInfo.keywords,
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <ClientProviders>
     <html lang="en" suppressHydrationWarning>
       <body 
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
@@ -42,9 +47,10 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange={true}
         >
-          <Header />
+        <Header session={session} />
           {children}
-          <Footer />
+          <Analytics />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

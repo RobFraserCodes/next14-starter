@@ -20,12 +20,12 @@ interface Tier {
   features: string[];
   price: {
     monthly: string;
-    annually: string;
+    yearly: string;
   };
 }
 
 interface Frequency {
-  value: 'monthly' | 'annually';
+  value: 'monthly' | 'yearly';
   label: string;
   priceSuffix: string;
 }
@@ -53,7 +53,7 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
 
   useEffect(() => {
     const tierId = searchParams.get('tier');
-    const frequencyValue = searchParams.get('frequency') as "monthly" | "annually" | null;
+    const frequencyValue = searchParams.get('frequency') as "monthly" | "yearly" | null;
   
     console.log('Tier ID:', tierId);
     console.log('Frequency Value:', frequencyValue);
@@ -68,12 +68,12 @@ export default function CheckoutPage({ session }: { session: Session | null }) {
           ...foundTier,
           price: {
             monthly: foundTier.price.monthly,
-            annually: foundTier.price.annually // Ensure this matches your data structure
+            yearly: foundTier.price.annually // Ensure this matches your data structure
           },
         })
         setSelectedFrequency({
           value: frequencyValue,
-          label: frequencyValue === 'monthly' ? 'Monthly' : 'Annually',
+          label: frequencyValue === 'monthly' ? 'Monthly' : 'Yearly',
           priceSuffix: frequencyValue === 'monthly' ? 'month' : 'year'
           });
       } else {
